@@ -17,8 +17,25 @@ public class SudokuPuzzle
     }
     
     // adds sudoku value into puzzle and updates all aligned values
-    public void AddValue(){}
+    public void AddValue(int row, int col, int value)
+    {
+        if (Puzzle[row, col].CurrentValue != null)
+        {
+            //dont override value
+            return; 
+        }
+        Puzzle[row, col].CurrentValue = value;
+    }
+
+    private void UpdateAlignedRow(int row, int col, int value)
+    {
+        
+    }
     
-    
-    
+    private void UpdateAlignedCol(int row, int col, int value){}
+
+    private void UpdateAligned3x3(int row, int col, int value){}
+
+
+
 }
