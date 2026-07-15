@@ -12,12 +12,15 @@ public class SudokuEntry
     
     public bool? Solvable { get; set; }
 
-    public SudokuEntry() {}
+    public SudokuEntry(int size)
+    {
+        AlignedValues = new bool[size];
+    }
     
-    public SudokuEntry(int currentValue)
+    public SudokuEntry(int size, int currentValue)
     {
         CurrentValue = currentValue;
-        AlignedValues = null;
+        AlignedValues = new bool[size];
         Solvable = null;
     }
 
