@@ -12,28 +12,45 @@ public class SudokuEntry
     
     public bool? Solvable { get; set; }
 
-    public SudokuEntry(int size)
+    public int row;
+    public int col;
+
+    public SudokuEntry(int size , int row, int col)
     {
         AlignedValues = new bool[size];
+        this.row = row;
+        this.col = col;
     }
     
-    public SudokuEntry(int size, int currentValue)
+    public SudokuEntry(int size, int currentValue, int row, int col)
     {
         CurrentValue = currentValue;
         AlignedValues = new bool[size];
         Solvable = null;
-    }
-
-    public SudokuEntry(SudokuPuzzle sudokuPuzzle )
-    {
-        CurrentValue = null;
-        // code to fill AlignedValues and set solvable
+        this.row = row;
+        this.col = col;
     }
 
     public void UpdateAlignedValue(int insertedValue) // when inserting into puzzle updates correspoinding aligned values
     {
         if(AlignedValues is not null){
             AlignedValues[insertedValue] = true;
+            Solvable = AlignedValues.Count(x => !x) == 1;
         }
+    }
+
+    public int Solve()
+    {
+        if (Solvable == true)
+        {
+            for (int i = 0; i < AlignedValues.Length; i++)
+            {
+                if (AlignedValues[i] == false)
+                {
+                    return i + 1;
+                }
+            }
+        }
+        return -1;
     }
 }
